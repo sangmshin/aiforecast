@@ -7,23 +7,23 @@
 const WELCOME = "Welcome to A.I. Forecast. ";
 //const WELCOME = "Welcome to Who's in charge here. ";
 
-const WHAT_DO_YOU_WANT = "Would you like to listen to Artificial Intelligence news and weather forecast? Say yes or no.  ";
+const WHAT_DO_YOU_WANT = "What news would you like to hear? ";
 
 const NOTIFY_MISSING_PERMISSIONS = "Please enable Location permissions in the Amazon Alexa app.";
 
-const NO_ADDRESS = "It looks like you don't have an address set. You can set your address from the Amazon Alexa app.";
+const NO_ADDRESS = "It looks like you don't have an address set. You can set your address from the companion app.";
 
 const ADDRESS_AVAILABLE = "Here is your full address: ";
 
 const ERROR = "Uh Oh. Looks like something went wrong.";
 
-const LOCATION_FAILURE = "There was an error with A.I. Forecast. Please try again.";
+const LOCATION_FAILURE = "There was an error with the Device Address API. Please try again.";
 
-const GOODBYE = "Good bye! Thanks for using A.I. Forecast Skill!";
+const GOODBYE = "Good bye! Thanks for A I Forecast Skill!";
 
-const UNHANDLED = "This skill doesn't support that. Please say yes or no.";
+const UNHANDLED = "This skill doesn't support that. Please ask something else.";
 
-const HELP = "You can say yes or no.";
+const HELP = "You can use this skill by asking something like: whats my address?";
 
 const STOP = "There is nothing to stop. Did you mean to ask something else?";
 
