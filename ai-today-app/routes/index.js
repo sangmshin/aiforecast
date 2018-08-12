@@ -4,7 +4,7 @@ const express = require('express')
 const router = express.Router();
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 var https = require('https');
 const request = require('request');
 var results_json = require('../data/results.json');
@@ -34,12 +34,13 @@ var news_intro = "According to an A.I. article published today by Science Daily,
 
 
 // WEATHER HISTORY API KEY
-var apiKey = '3116724450034216b5433851181108';
+var apiKey = '5d997944be7f4e34aa022837181208';
 var currentCity;
 // d98648111d75482e9e133424181108
 // d6a006083d1746d8ba420632180708
 // 7907268a25e44f4e9c335911180708
 // 3116724450034216b5433851181108
+// 5d997944be7f4e34aa022837181208
 
 
 
@@ -423,11 +424,6 @@ router.post('/', (req, res, next) => {
   // RESET CURRENT TEMP;
   currentTemp_new = 0;
 
-  req.on('data', (data)=>{
-    console.log('request data', data);
-    
-    
-  })
   currentCity = req.body.location;
 
   getSentiment__1();
@@ -447,7 +443,7 @@ router.post('/', (req, res, next) => {
     
     var checkTimer = setInterval(function () {
       
-      if (currentTemp_new != '0') {
+      if (currentTemp_new != 0) {
 
         var weatherPhrase = `
           ${sentiment2} weather in ${uc(currentCity)} will be ${sentiment3} It'll be ${currentTemp_new}\u2109 / ${celsius}\u2103 and ${lowerCase(condition_new)}.
@@ -578,12 +574,6 @@ function negativeSentiment3() {
   var sent3 = ["poor. ", "awful. ", "terrible. ", "miserable. ", "gloomy. ", "daunting. ", "unhappy. ", "ordinary. ", "unsatisfactory. ", "unhelpful. ", "unpleasant. ", "misbehaving. ", "down. ", "depressed. ", "unfriendly. ", "dissatisfied. ", "discouraged. ", "disturbed. "];
   return sent3[getRandom(0, sent3.length - 1)]
 }
-
-function getRandomSentiment2() {
-  var sent2 = ["On the bright side, ", "sadly, ", "Unfortunately, "];
-  return sent2[getRandom(0, sent2.length - 1)]
-}
-
 
 
 module.exports = router;
