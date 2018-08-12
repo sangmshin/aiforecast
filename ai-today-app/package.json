@@ -1,0 +1,41 @@
+{
+  "name": "ai-today-app",
+  "version": "1.0.0",
+  "description": "AI Today App built in Node.js and Express.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ./app.js --exec babel-node -e js",
+    "debug": "set DEBUG=express:* & nodemon ./app.js --exec babel-node -e js"
+  },
+  "keywords": [
+    "nodejs",
+    "api",
+    "express",
+    "ai",
+    "weather",
+    "news",
+    "science",
+    "handlebars"
+  ],
+  "author": "Shindrome",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "body-parser": "^1.18.3",
+    "capitalize": "^1.0.0",
+    "express": "^4.16.3",
+    "feedparser": "^2.2.9",
+    "fs": "0.0.1-security",
+    "hbs": "^4.0.1",
+    "https": "^1.0.0",
+    "lower-case": "^1.1.4",
+    "nodemon": "^1.18.3",
+    "path": "^0.12.7",
+    "reload": "^2.3.0",
+    "request": "^2.87.0",
+    "sentiment": "^5.0.1",
+    "upper-case": "^1.1.3"
+  }
+}

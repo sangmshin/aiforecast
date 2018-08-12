@@ -1,0 +1,8 @@
+App ID:
+ihXa8E72
+
+Client ID (Consumer Key):
+dj0yJmk9b25neTZvaVo5OU1tJmQ9WVdrOWFXaFlZVGhGTnpJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD0xYQ--
+
+Client Secret (Consumer Secret):
+a05366ae5ddd9899bf50c838be90cdc0fb26ba69
