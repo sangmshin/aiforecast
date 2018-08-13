@@ -34,7 +34,7 @@ var news_intro = "According to an A.I. article published today by Science Daily,
 
 
 // WEATHER HISTORY API KEY
-var apiKey = '5d997944be7f4e34aa022837181208';
+var apiKey = 'd6a006083d1746d8ba420632180708';
 var currentCity;
 // d98648111d75482e9e133424181108
 // d6a006083d1746d8ba420632180708
@@ -51,12 +51,12 @@ var currentCity;
 
 // WEATHER VARIABLES
 var today = new Date();
-var years = [2016, 2017];
+var years = [2017];
 var dateString = today.toISOString().slice(4, 10);
 var currentTime = today.getHours();
 var todaysDate = today.toISOString().slice(0, 10);
 var timeFrame, timeFrame_detail;
-
+var daytime, nighttime;
 
 // TIMEFRAME
 if (currentTime < 3) {
@@ -92,6 +92,15 @@ if (currentTime < 3) {
   timeFrame_detail = '9:00 pm - 11:59 pm'
 }
 
+// DEFINE DAYTIME OR NIGHTTIME
+if (timeFrame < 2 || timeFrame > 6) {
+  daytime = true;
+  nighttime = false;
+} else {
+  daytime = false;
+  nighttime = true;
+}
+
 var results = [];
 var allTemperatures = []; // no need to export
 var total = 0; // no need to export
@@ -100,6 +109,7 @@ var weatherSentiment;
 let condition_new;
 let currentTemp_new;
 let celsius;
+var weatherIcon;
 let news_isPositive, weather_isPositive;
 // let count = 0;
 
@@ -227,8 +237,11 @@ var todaysWeather = function () {
       console.log(`Location: ${result.data.request[0].query}`);
       console.log('current temperature: ' + currentTemp_new);
       console.log('Celcius: ', result.data.weather[0].hourly[timeFrame].tempC);
-      
+
       console.log(`Weather Condition: ${condition_new}`);
+
+
+
 
 
       // VALIDATE TODAY'S WEATHER
@@ -272,6 +285,104 @@ var todaysWeather = function () {
         weatherSentiment = 'so so';
         sentiment3 = 'so so.'
         console.log('Weather is so so');
+      }
+
+
+      // WEATHER ICON GENERATE
+      let con = lowerCase(condition_new)
+
+      if (con.includes('sun')) {
+        weatherIcon = 'wi-day-sunny'
+      } else if (con.includes('rain') && daytime) {
+        weatherIcon = 'wi-day-rain'
+      } else if (con.includes('rain') && nighttime) {
+        weatherIcon = 'wi-night-rain'
+      } else if (con.includes('snow') && daytime) {
+        weatherIcon = 'wi-day-snow'
+      } else if (con.includes('snow') && nighttime) {
+        weatherIcon = 'wi-night-snow'
+      } else if (con.includes('cloud') && daytime) {
+        weatherIcon = 'wi-day-cloudy'
+      } else if (con.includes('cloud') && nighttime) {
+        weatherIcon = 'wi-night-cloudy'
+      } else if (con.includes('shower') && daytime) {
+        weatherIcon = 'wi-day-showers'
+      } else if (con.includes('shower') && nighttime) {
+        weatherIcon = 'wi-night-showers'
+      } else if (con.includes('fog') && daytime) {
+        weatherIcon = 'wi-day-fog'
+      } else if (con.includes('fog') && nighttime) {
+        weatherIcon = 'wi-night-fog'
+      } else if (con.includes('thunderstorm') && daytime) {
+        weatherIcon = 'wi-day-thunderstorm'
+      } else if (con.includes('thunderstorm') && nighttime) {
+        weatherIcon = 'wi-night-thunderstorm'
+      } else if (con.includes('hail') && daytime) {
+        weatherIcon = 'wi-day-hail'
+      } else if (con.includes('hail') && nighttime) {
+        weatherIcon = 'wi-night-hail'
+      } else if (con.includes('lightning')) {
+        weatherIcon = 'wi-lightning'
+      } else if (con.includes('sprinkle') && daytime) {
+        weatherIcon = 'wi-day-sprinkle'
+      } else if (con.includes('sprinkle') && nighttime) {
+        weatherIcon = 'wi-night-sprinkle'
+      } else if (con.includes('eclipse') && daytime) {
+        weatherIcon = 'wi-solar-eclipse'
+      } else if (con.includes('eclipse') && nighttime) {
+        weatherIcon = 'wi-lunar-eclipse'
+      } else if (con.includes('star')) {
+        weatherIcon = 'wi-stars'
+      } else if (con.includes('raindrop')) {
+        weatherIcon = 'wi-raindrops'
+      } else if (con.includes('sleet') && daytime) {
+        weatherIcon = 'wi-day-sleet'
+      } else if (con.includes('sleet') && nighttime) {
+        weatherIcon = 'wi-night-sleet'
+      } else if (con.includes('fire')) {
+        weatherIcon = 'wi-fire'
+      } else if (con.includes('volcano')) {
+        weatherIcon = 'wi-volcano'
+      } else if (con.includes('smog')) {
+        weatherIcon = 'wi-smog'
+      } else if (con.includes('flood')) {
+        weatherIcon = 'wi-flood'
+      } else if (con.includes('hurricane')) {
+        weatherIcon = 'wi-hurricane'
+      } else if (con.includes('gust')) {
+        weatherIcon = 'wi-cloudy-gusts'
+      } else if (con.includes('smoke')) {
+        weatherIcon = 'wi-smoke'
+      } else if (con.includes('dust')) {
+        weatherIcon = 'wi-dust'
+      } else if (con.includes('sandstorm')) {
+        weatherIcon = 'wi-sandstorm'
+      } else if (con.includes('meteor')) {
+        weatherIcon = 'wi-meteor'
+      } else if (con.includes('tornado')) {
+        weatherIcon = 'wi-tornado'
+      } else if (con.includes('snowflake')) {
+        weatherIcon = 'wi-snowflake-cold'
+      } else if (con.includes('quake')) {
+        weatherIcon = 'wi-earthquake'
+      } else if (con.includes('tsunami')) {
+        weatherIcon = 'wi-tsunami'
+      } else if (con.includes('advisor')) {
+        weatherIcon = 'wi-small-craft-advisory'
+      } else if (con.includes('warn')) {
+        weatherIcon = 'wi-storm-warning'
+      } else if (con.includes('sandstorm')) {
+        weatherIcon = 'wi-sandstorm'
+      } else if (con.includes('meteor')) {
+        weatherIcon = 'wi-meteor'
+      } else if (con.includes('humid')) {
+        weatherIcon = 'wi-humidity'
+      } else if (con.includes('sunrise')) {
+        weatherIcon = 'wi-sunrise'
+      } else if (con.includes('sunset')) {
+        weatherIcon = 'wi-sunset'
+      } else {
+        weatherIcon = 'wi-na'
       }
 
 
@@ -410,7 +521,8 @@ const myAPI = {
 router.get('/', (req, res, next) => {
   res.render('index', {
     app_title: 'AI TODAY',
-    welcome: 'Welcome to AI TODAY!',
+    welcome: `Welcome to<br/>
+    < <span class="aitoday">A.I. Today</span> />`,
     // sentiment: sentiment1,
     // AI_News: AI_News
   })
@@ -423,6 +535,7 @@ router.post('/', (req, res, next) => {
 
   // RESET CURRENT TEMP;
   currentTemp_new = 0;
+  weatherIcon = '';
 
   currentCity = req.body.location;
 
@@ -430,60 +543,70 @@ router.post('/', (req, res, next) => {
   // getAverage();
 
   const results = {
-    location: req.body.location
+    location: currentCity
+    // location: req.body.location
   };
 
   var renderer = async () => {
 
-    await getAverage();
-    await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+    var _averageTemp = await getAverage();
+    return _averageTemp;
+    // await new Promise((resolve, reject) => setTimeout(resolve, 1000));
   }
 
   renderer().then((_averageTemp) => {
-    
+
+    console.log('_averageTemp', _averageTemp);
+
+
     var checkTimer = setInterval(function () {
-      
-      if (currentTemp_new != 0) {
 
-        var weatherPhrase = `
-          ${sentiment2} weather in ${uc(currentCity)} will be ${sentiment3} It'll be ${currentTemp_new}\u2109 / ${celsius}\u2103 and ${lowerCase(condition_new)}.
-        `
-        console.log(weatherPhrase);
-        console.log('new temperature received from', currentCity);
+      if (currentTemp_new != '0' && weatherIcon != '') {
 
-        clearInterval(checkTimer);
 
-        const result = {
-          location: currentCity
-        };
-    
-        results_json.unshift(result);
+          var weatherPhrase = `
+            weather in ${uc(currentCity)} will be ${sentiment3} It'll be ${currentTemp_new}\u2109 / ${celsius}\u2103 and ${lowerCase(condition_new)}.
+          `
+          console.log(weatherPhrase);
+          console.log('new temperature received from', currentCity);
 
-        fs.writeFile('data/results.json', JSON.stringify(results_json), 'utf8', function (err) {
-          if (err) {
-            console.log(err);
-          }
-        });
+          clearInterval(checkTimer);
 
-        res.render('index', {
-          app_title : 'A.I. Today',
-          welcome : 'Welcome to A.I. Today!',
-          sentiment : sentiment1,
-          news_intro : news_intro,
-          AI_News : AI_News,
-          weatherPhrase : weatherPhrase,
-          message : " name and message has been posted to MongoDB. Here is the POSTed results!",
-          results : results,
-          results_json : results_json
-        })
+          const result = {
+            location: currentCity
+          };
 
-        return true;
-        
+          results_json.unshift(result);
+
+          fs.writeFile('data/results.json', JSON.stringify(results_json), 'utf8', function (err) {
+            if (err) {
+              console.log(err);
+            }
+          });
+
+          res.render('index', {
+            app_title: 'A.I. Today',
+            welcome: `Welcome to<br/>
+            <&nbsp;<span class="aitoday">A.I.&nbsp;Today</span>&nbsp;/>`,
+            sentiment1: sentiment1,
+            news_intro: news_intro,
+            AI_News: AI_News,
+            sentiment2 : sentiment2,
+            weatherPhrase: weatherPhrase,
+            message: " name and message has been posted to MongoDB. Here is the POSTed results!",
+            results: results,
+            results_json: results_json,
+            iconCSS: weatherIcon
+          })
+
+          return true;
+
+
       } else {
         console.log('Waiting for getAverage() to finish...');
       }
     }, 1000);
-    
+
   })
 
 
@@ -524,7 +647,7 @@ router.post('/', (req, res, next) => {
 //         let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
 //         console.log(weather);
 //         console.log(weather.main);
-        
+
 //         res.render('index', {weather: weatherText});
 //       }
 //     }
