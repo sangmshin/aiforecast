@@ -1,12 +1,12 @@
 'use strict';
 
-const express = require('express')
-const router = express.Router();
+var express = require('express')
+var router = express.Router();
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
-// const bodyParser = require('body-parser');
+// var bodyParser = require('body-parser');
 var https = require('https');
-const request = require('request');
+var request = require('request');
 var results_json = require('../data/results.json');
 var fs = require('fs');
 var uc = require('upper-case')
@@ -14,7 +14,7 @@ var capitalize = require('capitalize')
 var lowerCase = require('lower-case')
 
 // Local imports
-const newsParser = require('../parseRSS');
+var newsParser = require('../parseRSS');
 
 
 var sentiment1, sentiment2, sentiment3;
@@ -51,7 +51,7 @@ var currentCity;
 
 // WEATHER VARIABLES
 var today = new Date();
-var years = [2017];
+var years = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
 var dateString = today.toISOString().slice(4, 10);
 var currentTime = today.getHours();
 var todaysDate = today.toISOString().slice(0, 10);
@@ -106,12 +106,13 @@ var allTemperatures = []; // no need to export
 var total = 0; // no need to export
 var averageTemp;
 var weatherSentiment;
-let condition_new;
-let currentTemp_new;
-let celsius;
+var condition_new;
+var currentTemp_new;
+var celsius;
 var weatherIcon;
-let news_isPositive, weather_isPositive;
-// let count = 0;
+var news_isPositive, weather_isPositive;
+var searched_location;
+// var count = 0;
 
 console.log('\nCurrent Time is: ' + today.getHours(), '\n');
 console.log('Time frame is: ' + timeFrame, ' ( ' + timeFrame_detail + ' ) ' + '\n');
@@ -178,12 +179,12 @@ var getAverage = function () {
   averageTemp = 0;
   total = 0;
 
-  let count = 0;
+  var count = 0;
 
   years.forEach(function (year, index) {
 
     var currentUrl = 'https://api.worldweatheronline.com/premium/v1/past-weather.ashx?q=' + encodeURIComponent(currentCity) + '&tp=3&format=json&key=' + apiKey + '&date=' + year + dateString;
-
+    
     request(currentUrl, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var result = JSON.parse(body);
@@ -193,7 +194,10 @@ var getAverage = function () {
 
         // GET AVERAGE TEMPERaTURE OF THE SAME DAY IN A SPAN OF LAST 9 YEARS
         total = total + parseInt(result.data.weather[0].hourly[timeFrame].tempF); //27
-        averageTemp = total / years.length;
+        console.log('year count is: ', count);
+        
+        // averageTemp = total / years.length;
+        averageTemp = total / (count + 1);
 
         // GET AVERAGE TEMPERaTURE -- ANOTHER WAY
         allTemperatures.push(parseInt(result.data.weather[0].hourly[timeFrame].tempF))
@@ -206,7 +210,7 @@ var getAverage = function () {
 
         if (count == years.length) {
           console.log(`Average: ${averageTemp}`);
-          todaysWeather();
+          // todaysWeather();
         }
 
       } else {
@@ -232,6 +236,7 @@ var todaysWeather = function () {
       currentTemp_new = result.data.weather[0].hourly[timeFrame].tempF;
       condition_new = result.data.weather[0].hourly[timeFrame].weatherDesc[0].value;
       celsius = result.data.weather[0].hourly[timeFrame].tempC;
+      searched_location = result.data.request[0].query;
 
       console.log(`Today: ${todaysDate}`);
       console.log(`Location: ${result.data.request[0].query}`);
@@ -289,7 +294,7 @@ var todaysWeather = function () {
 
 
       // WEATHER ICON GENERATE
-      let con = lowerCase(condition_new)
+      var con = lowerCase(condition_new)
 
       if (con.includes('sun')) {
         weatherIcon = 'wi-day-sunny'
@@ -542,7 +547,7 @@ router.post('/', (req, res, next) => {
   getSentiment__1();
   // getAverage();
 
-  const results = {
+  var results = {
     location: currentCity
     // location: req.body.location
   };
@@ -550,8 +555,10 @@ router.post('/', (req, res, next) => {
   var renderer = async () => {
 
     var _averageTemp = await getAverage();
+    await new Promise((resolve, reject) => setTimeout(resolve, 5000));
+    todaysWeather();
     return _averageTemp;
-    // await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+
   }
 
   renderer().then((_averageTemp) => {
@@ -563,16 +570,20 @@ router.post('/', (req, res, next) => {
 
       if (currentTemp_new != '0' && weatherIcon != '') {
 
-
+        
           var weatherPhrase = `
-            weather in ${uc(currentCity)} will be ${sentiment3} It'll be ${currentTemp_new}\u2109 / ${celsius}\u2103 and ${lowerCase(condition_new)}.
+            weather in ${searched_location} will be ${sentiment3} It'll be ${currentTemp_new}\u2109 / ${celsius}\u2103 and ${lowerCase(condition_new)}.
           `
+          // var weatherPhrase = `
+          //   weather in ${uc(currentCity)} will be ${sentiment3} It'll be ${currentTemp_new}\u2109 / ${celsius}\u2103 and ${lowerCase(condition_new)}.
+          // `
+
           console.log(weatherPhrase);
           console.log('new temperature received from', currentCity);
 
           clearInterval(checkTimer);
 
-          const result = {
+          var result = {
             location: currentCity
           };
 
@@ -633,18 +644,18 @@ router.post('/', (req, res, next) => {
 // CURRENTLY NOT USING
 // too simple
 // router.post('/post', function (req, res) {
-//   let city = req.body.location;
-//   let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${OWM_apiKey}`
+//   var city = req.body.location;
+//   var url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${OWM_apiKey}`
 
 //   request(url, function (err, response, body) {
 //     if(err){
 //       res.render('index', {error: 'Error, please try again'});
 //     } else {
-//       let weather = JSON.parse(body)
+//       var weather = JSON.parse(body)
 //       if(weather.main == undefined){
 //         res.render('index', {error: 'Error, please try again'});
 //       } else {
-//         let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
+//         var weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
 //         console.log(weather);
 //         console.log(weather.main);
 
