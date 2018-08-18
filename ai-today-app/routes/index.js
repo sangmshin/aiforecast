@@ -34,7 +34,7 @@ var news_intro = "According to an A.I. article published today by Science Daily,
 
 
 // WEATHER HISTORY API KEY
-var apiKey = 'd6a006083d1746d8ba420632180708';
+var apiKey = '5d997944be7f4e34aa022837181208';
 var currentCity;
 // d98648111d75482e9e133424181108
 // d6a006083d1746d8ba420632180708
@@ -51,7 +51,7 @@ var currentCity;
 
 // WEATHER VARIABLES
 var today = new Date();
-var years = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
+var years = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
 var dateString = today.toISOString().slice(4, 10);
 var currentTime = today.getHours();
 var todaysDate = today.toISOString().slice(0, 10);
@@ -302,6 +302,8 @@ var todaysWeather = function () {
         weatherIcon = 'wi-day-rain'
       } else if (con.includes('rain') && nighttime) {
         weatherIcon = 'wi-night-rain'
+      } else if (con.includes('drizz')) {
+        weatherIcon = 'wi-rain'
       } else if (con.includes('snow') && daytime) {
         weatherIcon = 'wi-day-snow'
       } else if (con.includes('snow') && nighttime) {
@@ -310,6 +312,8 @@ var todaysWeather = function () {
         weatherIcon = 'wi-day-cloudy'
       } else if (con.includes('cloud') && nighttime) {
         weatherIcon = 'wi-night-cloudy'
+      } else if (con.includes('cloud') && con.includes('wind')) {
+        weatherIcon = 'wi-cloudy-windy'
       } else if (con.includes('shower') && daytime) {
         weatherIcon = 'wi-day-showers'
       } else if (con.includes('shower') && nighttime) {

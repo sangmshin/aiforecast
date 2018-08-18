@@ -1,13 +1,14 @@
-body{
+body {
   background-color: #112a50;
-  /* height: 100vh; */
   padding-left: 40px;
   background: url('../images/32.jpg') no-repeat center center;
   padding-right: 40px;
   background-size: cover;
 }
-.container-fluid{
 
+.max--width {
+  /* width: 940px; */
+  margin: 0 auto;
 }
 
 .welcome {
@@ -17,31 +18,36 @@ body{
   font-family: 'VT323', monospace;
   transition: all .3s ease-out;
 }
-.aitoday{
+
+.aitoday {
   color: #7ac2ff;
 }
 
-.results h1{
+.results h1 {
   color: #fff;
   font-family: 'VT323', monospace;
   font-size: 60px;
 }
-p.news_intro{ 
+
+p.news_intro {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: #fff;
   font-size: 13px;
 }
-p.news_title{
+
+p.news_title {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: #fff;
   font-size: 30px;
 }
-p.news_desc{
+
+p.news_desc {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: #fff;
   font-size: 16px;
 }
-p.weather_phrase{
+
+p.weather_phrase {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: #fff;
   font-size: 30px;
@@ -53,21 +59,18 @@ p.weather_phrase{
   color: #fff;
 }
 
-
-
 .app-desc {
-  margin: 50px auto; 
+  margin: 50px auto;
   width: 100%;
   font-size: 14px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.app-desc p{
+
+.app-desc p {
   margin: 0 auto;
   width: 500px;
   color: #fff;
 }
-
-
 
 form input#location {
   font-size: 30px;
@@ -83,7 +86,7 @@ form input#location:focus {
   font-family: 'VT323', monospace;
   color: #1366ac;
   outline: none !important;
-  border:1px solid #1366ac;
+  border: 1px solid #1366ac;
   background-color: #fff;
   box-shadow: 0 0 1px #719ECE;
 }
@@ -113,32 +116,44 @@ a:link {
 }
 
 /* visited link */
+
 form input[type="submit"]:visited {
-  color: #fff!important;
+  color: #fff !important;
 }
 
 form input[type="submit"]:active {
-  color: #fff!important;
+  color: #fff !important;
 }
 
 /* width: 100%; */
-.credit{
+
+.credit {
   width: 100%;
   margin: 20px auto 0;
   text-align: center;
 }
-.credit p{
+
+.credit p {
   color: #fff;
   font-family: 'VT323', monospace;
   font-size: 16px;
 }
 
-.autocomplete-items{
+.autocomplete-items {
   color: #fff;
 }
 
-@media (max-width:650px){
-  .app-desc p{
+/* MEDIA QUERY */
+
+@media (min-width: 768px) {
+  .container {
+    width: 100%;
+    max-width: 870px;
+  }
+}
+
+@media (max-width:650px) {
+  .app-desc p {
     width: 100%;
   }
   form input[type="submit"] {
@@ -146,7 +161,7 @@ form input[type="submit"]:active {
   }
 }
 
-@media (max-width:500px){
+@media (max-width:500px) {
   form input#location {
     width: 100%;
     font-size: 6vw;
@@ -156,5 +171,11 @@ form input[type="submit"]:active {
   }
   .welcome {
     font-size: 40px;
+  }
+}
+
+@media (max-width:400px) {
+  .results h1 {
+    font-size: 50px;
   }
 }
