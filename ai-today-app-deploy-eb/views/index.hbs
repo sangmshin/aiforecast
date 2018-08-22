@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{app_title}}</title>
+
+
+  {{!-- <script src="./reload/reload.js"></script> --}}
+
+{{!-- GOOGLE FONT : VT323 --}}
+  <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+    {{!-- WEATHER ICONS --}}
+<link rel="stylesheet" href="/css/weather-icons.min.css">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="container max--width">
+
+    {{!-- WELCOME TO AI TODAY --}}
+    <div class="row text-center">
+      <h1 class="welcome text-center">{{{welcome}}}</h1>
+    </div>
+
+    <div id="fileNames">
+      
+    </div>
+
+    {{!-- RESULTS --}}
+    <div class="row text-center results">
+      <h1><i>{{sentiment1}}</i></h1>
+      <p class="news_intro"><i>{{news_intro}}</i></p>
+      <p class="news_title">{{AI_News.title}}</p>
+      <p class="news_desc">{{{AI_News.description}}}</p>
+      <h1><i>{{sentiment2}}</i></h1>
+      <p class="weather_phrase">{{weatherPhrase}}</p>
+      <i class="wi {{iconCSS}}"></i>
+    </div>
+
+
+    {{!-- DESCRIPTION --}}
+    <div class="row text-center app-desc">
+      <p>Enter a city or country below to
+get the latest A.I. news and weather forecast
+for your area or anywhere in the worlds.</p>
+
+    </div>
+    
+
+    <div class="row text-center center-block">
+      <form action="/" method="post" autocomplete="off">
+        <input type="text" name="location" id="location" placeholder="Enter a city or country" required autofocus>
+        <input type="submit" class ="btn" value="ENTER">
+      </form>
+    </div>
+
+    <div class="row center-block text-center ">
+      <div class="credit">
+        <p>$ devDependency : { “shindrome” }</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="./js/script.js"></script>
+
+</body>
+</html>

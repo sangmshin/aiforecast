@@ -1,3 +1,5 @@
+
+
 const express = require('express')
 const app = express()
 const reload = require('reload')
@@ -6,7 +8,6 @@ const path = require('path')
 const fs = require('fs')
 
 const PORT = process.env.PORT || 3000;
-
 
 app.use(express.urlencoded({
   extended: true
@@ -41,3 +42,6 @@ app.listen(PORT, () => {
 reload(app, {
   verbose: true
 })
+
+
+// module.exports.server = sls(app)

@@ -1,2 +1,7 @@
 node_modules
 .bashrc
+AWS_AccessKeyID_SecretAccessKey_sangmin.csv
+jspm_packages
+
+# Serverless directories
+.serverless
