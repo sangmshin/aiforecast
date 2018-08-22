@@ -1,6 +1,6 @@
 # serverless.yml
 
-service: serverless-nodejs-app
+service: aitoday-sls-nodejs-app
 
 provider:
   name: aws
